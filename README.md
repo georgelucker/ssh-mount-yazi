@@ -23,7 +23,8 @@
 ```bash
 sudo apt install ssh sshfs tmux
 ```
-# Установка yazi: см. инструкции на https://github.com/sxyazi/yazi
+
+Установка yazi: см. инструкции на https://github.com/sxyazi/yazi
 
 🔐 Настройка SSH
 
