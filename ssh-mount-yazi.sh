@@ -15,14 +15,15 @@ if ! mountpoint -q "$mount_point"; then
   sshfs "$name":/ "$mount_point"
 fi
 
+# Устанавливаем редактор для yazi
+export EDITOR=nvim
+export VISUAL=nvim
+
 # Открываем yazi в tmux-панели, если в tmux
 if [ -n "$TMUX" ]; then
-  tmux split-window -h "yazi \"$mount_point\""
-  # Немного подождем, чтобы tmux успел отобразить окно
+  tmux split-window -h "EDITOR=nvim VISUAL=nvim yazi \"$mount_point\""
   sleep 0.2
-  tmux select-pane -L  # Переключаемся на левую панель
-  # Расскоментируйте, чтобы поменять yazi и текущий терминал местами
-  # tmux swap-pane -s 0 -t 1  # Меняем местами панели (левая и правая)
+  tmux select-pane -L
 else
   echo "Не в tmux-сессии — yazi не запущен"
 fi
