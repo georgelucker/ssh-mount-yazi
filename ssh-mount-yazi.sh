@@ -1,32 +1,36 @@
 #!/bin/bash
-
 if [ -z "$1" ]; then
   echo "Usage: $0 <host>"
   exit 1
 fi
-
 name="$1"
 mount_point="$HOME/$name"
-
 mkdir -p "$mount_point"
 
-# Проверяем, смонтирована ли папка
-if ! mountpoint -q "$mount_point"; then
-  sshfs "$name":/ "$mount_point"
+# Определяем удаленный путь в зависимости от аргумента
+if [ "$name" = "ans" ]; then
+  remote_path="/root/ans/"
+elif [ "$name" = "terra" ]; then
+  remote_path="/home/user/"
+elif [ "$name" = "web" ]; then
+  remote_path="/var/www/"
+else
+  remote_path="/"
 fi
 
-# Устанавливаем редактор для yazi
-export EDITOR=nvim
-export VISUAL=nvim
+if ! mountpoint -q "$mount_point"; then
+  sshfs "$name":"$remote_path" "$mount_point"
+fi
+export EDITOR=lvim
+export VISUAL=lvim
 
-# Открываем yazi в tmux-панели, если в tmux
+# Переименовать активную вкладку tmux
 if [ -n "$TMUX" ]; then
-  tmux split-window -h "EDITOR=nvim VISUAL=nvim yazi \"$mount_point\""
+  tmux rename-window "$name"
+  tmux split-window -h "EDITOR=lvim VISUAL=lvim yazi \"$mount_point\""
   sleep 0.2
   tmux select-pane -L
 else
   echo "Не в tmux-сессии — yazi не запущен"
 fi
-
-# Подключаемся по SSH
 ssh "$name"
