@@ -33,4 +33,14 @@ if [ -n "$TMUX" ]; then
 else
   echo "Не в tmux-сессии — yazi не запущен"
 fi
-ssh "$name"
+
+# SSH подключение с переходом в нужную директорию
+if [ "$name" = "ans" ]; then
+  ssh "$name" -t "cd /root/ans && exec \$SHELL"
+elif [ "$name" = "terra" ]; then
+  ssh "$name" -t "cd /root/dc/pcc && exec \$SHELL"
+elif [ "$name" = "web" ]; then
+  ssh "$name" -t "cd /var/www && exec \$SHELL"
+else
+  ssh "$name"
+fi
