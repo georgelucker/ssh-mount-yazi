@@ -11,7 +11,7 @@ mkdir -p "$mount_point"
 if [ "$name" = "ans" ]; then
   remote_path="/root/ans/"
 elif [ "$name" = "terra" ]; then
-  remote_path="/home/user/"
+  remote_path="/root/dc/pcc/"
 elif [ "$name" = "web" ]; then
   remote_path="/var/www/"
 else
