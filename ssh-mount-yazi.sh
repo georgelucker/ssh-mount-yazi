@@ -10,6 +10,8 @@ mkdir -p "$mount_point"
 # Определяем удаленный путь в зависимости от аргумента
 if [ "$name" = "ans" ]; then
   remote_path="/root/ans/"
+elif [ "$name" = "ans-test" ]; then
+  remote_path="/root/ans/"
 elif [ "$name" = "terra" ]; then
   remote_path="/root/dc/pcc/"
 elif [ "$name" = "web" ]; then
@@ -21,13 +23,13 @@ fi
 if ! mountpoint -q "$mount_point"; then
   sshfs "$name":"$remote_path" "$mount_point"
 fi
-export EDITOR=lvim
-export VISUAL=lvim
+export EDITOR=nvim
+export VISUAL=nvim
 
 # Переименовать активную вкладку tmux
 if [ -n "$TMUX" ]; then
   tmux rename-window "$name"
-  tmux split-window -h "EDITOR=lvim VISUAL=lvim yazi \"$mount_point\""
+  tmux split-window -h "EDITOR=nvim VISUAL=nvim yazi \"$mount_point\""
   sleep 0.2
   tmux select-pane -L
 else
