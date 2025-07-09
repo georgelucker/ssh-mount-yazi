@@ -13,7 +13,7 @@ if [ "$name" = "ans" ]; then
 elif [ "$name" = "ans-test" ]; then
   remote_path="/root/ans/"
 elif [ "$name" = "terra" ]; then
-  remote_path="/root/dc/pcc/"
+  remote_path="/root/"
 elif [ "$name" = "web" ]; then
   remote_path="/var/www/"
 else
