@@ -40,7 +40,7 @@ fi
 if [ "$name" = "ans" ]; then
   ssh "$name" -t "cd /root/ans && exec \$SHELL"
 elif [ "$name" = "terra" ]; then
-  ssh "$name" -t "cd /root/dc/pcc && exec \$SHELL"
+  ssh "$name" -t "cd /root && exec \$SHELL"
 elif [ "$name" = "web" ]; then
   ssh "$name" -t "cd /var/www && exec \$SHELL"
 else
