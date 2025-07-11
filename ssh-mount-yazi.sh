@@ -38,7 +38,7 @@ fi
 
 # SSH подключение с переходом в нужную директорию
 if [ "$name" = "ans" ]; then
-  ssh "$name" -t "cd /root/ans && exec /usr/bin/zsh"
+  ssh "$name" -t "cd /root/ans && exec \$SHELL"
 elif [ "$name" = "terra" ]; then
   ssh "$name" -t "cd /root && exec /usr/bin/zsh"
 elif [ "$name" = "web" ]; then
