@@ -9,7 +9,7 @@ mkdir -p "$mount_point"
 
 # Определяем удаленный путь в зависимости от аргумента
 if [ "$name" = "ans" ]; then
-  remote_path="/root/ans/"
+  remote_path="/root/"
 elif [ "$name" = "ans-test" ]; then
   remote_path="/root/ans/"
 elif [ "$name" = "terra" ]; then
@@ -38,9 +38,9 @@ fi
 
 # SSH подключение с переходом в нужную директорию
 if [ "$name" = "ans" ]; then
-  ssh "$name" -t "cd /root/ans && exec \$SHELL"
+  ssh "$name" -t "cd /root/ans && exec /usr/bin/zsh"
 elif [ "$name" = "terra" ]; then
-  ssh "$name" -t "cd /root && exec \$SHELL"
+  ssh "$name" -t "cd /root && exec /usr/bin/zsh"
 elif [ "$name" = "web" ]; then
   ssh "$name" -t "cd /var/www && exec \$SHELL"
 else
